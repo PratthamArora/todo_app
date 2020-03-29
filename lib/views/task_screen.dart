@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/model/task_data.dart';
 import 'package:todoapp/widgets/task_list.dart';
+
 import 'add_task.dart';
 
 class TaskScreen extends StatelessWidget {
@@ -17,18 +18,7 @@ class TaskScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTask(
-              (newTaskTitle) {
-//                setState(
-//                  () {
-//                    task.add(
-//                      Task(name: newTaskTitle, isDone: false),
-//                    );
-//                  },
-//                );
-                Navigator.pop(context);
-              },
-            ),
+            builder: (context) => AddTask(),
           );
         },
       ),
