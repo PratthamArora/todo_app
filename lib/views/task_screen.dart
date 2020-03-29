@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/model/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todoapp/model/task_data.dart';
 import 'package:todoapp/widgets/task_list.dart';
-
 import 'add_task.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> task = [];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +19,13 @@ class _TaskScreenState extends State<TaskScreen> {
             context: context,
             builder: (context) => AddTask(
               (newTaskTitle) {
-                setState(
-                  () {
-                    task.add(
-                      Task(name: newTaskTitle, isDone: false),
-                    );
-                  },
-                );
+//                setState(
+//                  () {
+//                    task.add(
+//                      Task(name: newTaskTitle, isDone: false),
+//                    );
+//                  },
+//                );
                 Navigator.pop(context);
               },
             ),
@@ -71,7 +64,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   ),
                 ),
                 Text(
-                  '${task.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -83,9 +76,7 @@ class _TaskScreenState extends State<TaskScreen> {
           Expanded(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TaskList(
-                task: task,
-              ),
+              child: TaskList(),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
