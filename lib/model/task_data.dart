@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:flutter/foundation.dart';
 import 'package:todoapp/model/task.dart';
 
@@ -15,6 +14,11 @@ class TaskData extends ChangeNotifier {
   void addTask(String newTaskTitle) {
     final tasks = Task(name: newTaskTitle);
     _task.add(tasks);
+    notifyListeners();
+  }
+
+  void updateTask(Task task) {
+    task.toggleDone();
     notifyListeners();
   }
 }
